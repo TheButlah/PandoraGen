@@ -1,0 +1,4 @@
+name: PandoraGen
+main: me.thebutlah.pandoragen.PandoraGen
+version: 0.2
+load: STARTUP
