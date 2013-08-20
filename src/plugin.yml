@@ -1,4 +1,4 @@
 name: PandoraGen
-main: me.thebutlah.pandoragen.PandoraGen
+main: me.sleightofmind.pandoragen.PandoraGen
 version: 0.2
 load: STARTUP

@@ -1,4 +1,4 @@
-package me.thebutlah.pandoragen.generator;
+package me.sleightofmind.pandoragen.generator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,20 +11,11 @@ import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.generator.BlockPopulator;
 import org.bukkit.util.noise.PerlinNoiseGenerator;
 
-public class PandoraChunkGenerator extends ChunkGenerator{
-
-	
-	public static boolean runonce = true;
-	
+public class PandoraChunkGenerator extends ChunkGenerator{	
 	
 	@Override
-	public byte[][] generateBlockSections(World world, Random random, int chunkx, int chunkz, ChunkGenerator.BiomeGrid biomes) {
-		byte[][] result = new byte[world.getMaxHeight() >> 4][];
-		if(runonce){
-			System.out.println("Ran once, adding populators.!");
-			world.getPopulators().add(new OrePopulator());
-			runonce = false;
-		}
+	public short[][] generateExtBlockSections(World world, Random random, int chunkx, int chunkz, ChunkGenerator.BiomeGrid biomes) {
+		short[][] blockdata = new short[world.getMaxHeight() >> 4][];
 		
 		for (int x=0; x<16; x++) {
 			for (int z=0; z<16; z++) {
@@ -39,19 +30,19 @@ public class PandoraChunkGenerator extends ChunkGenerator{
 					}else if(y < height){
 						blockid = Material.STONE.getId();
 					}
-					this.setBlock(result, x, y, z, (byte) blockid);
+					this.setBlock(blockdata, x, y, z, (short) blockid);
 				}
 			}
 		}
 		
-		return result;
+		return blockdata;
 	}
 	
-	private void setBlock(byte[][] result, int x, int y, int z, byte blkid) {
-        if (result[y >> 4] == null) {
-            result[y >> 4] = new byte[4096];
+	private void setBlock(short[][] blockdata, int x, int y, int z, short blkid) {
+        if (blockdata[y >> 4] == null) {
+            blockdata[y >> 4] = new short[4096];
         }
-        result[y >> 4][((y & 0xF) << 8) | (z << 4) | x] = blkid;
+        blockdata[y >> 4][((y & 0xF) << 8) | (z << 4) | x] = blkid;
     }
 	
 	@Override
@@ -62,6 +53,7 @@ public class PandoraChunkGenerator extends ChunkGenerator{
 		return new Location(world, x, y, z);
     }
 	
+	@Override
 	public List<BlockPopulator> getDefaultPopulators(World w){
 		List<BlockPopulator> pops = new ArrayList<BlockPopulator>();
 		pops.add(new OrePopulator());

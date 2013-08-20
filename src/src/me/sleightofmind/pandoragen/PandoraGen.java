@@ -1,6 +1,11 @@
-package me.thebutlah.pandoragen;
+package me.sleightofmind.pandoragen;
 
-import me.thebutlah.pandoragen.generator.PandoraChunkGenerator;
+import java.util.ArrayList;
+import java.util.List;
+
+import me.sleightofmind.pandoragen.biomes.Biome;
+import me.sleightofmind.pandoragen.biomes.PlainsBiome;
+import me.sleightofmind.pandoragen.generator.PandoraChunkGenerator;
 
 import org.bukkit.Bukkit;
 import org.bukkit.World;
@@ -14,9 +19,13 @@ public class PandoraGen extends JavaPlugin {
 	public final static String WORLD_NAME = "Pandora";
 	private static World world = null;
 	
+	public static final List<Biome> biomes = new ArrayList<Biome>();
+	public static WhittakerManager wman;
+	
 	@Override
 	public void onEnable() {
-		
+		initBiomeList();
+		wman = new WhittakerManager();
 	}
 	
 	/**
@@ -38,6 +47,10 @@ public class PandoraGen extends JavaPlugin {
 			world = Bukkit.createWorld(wc);
 		}
 		return world;
+	}
+	
+	private static void initBiomeList() {
+		biomes.add(new PlainsBiome());
 	}
 
 }
