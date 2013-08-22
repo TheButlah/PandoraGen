@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import me.sleightofmind.pandoragen.populator.OrePopulator;
+
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -20,18 +22,6 @@ public class PandoraChunkGenerator extends ChunkGenerator{
 		for (int x=0; x<16; x++) {
 			for (int z=0; z<16; z++) {
 				
-				int height = (int) ((PerlinNoiseGenerator.getNoise(getCoordinate(chunkx, x)/200.0, getCoordinate(chunkz, z)/200.0, 4, 2, 0.3) * 30) + 80);
-				for(int y = 0; y < world.getMaxHeight(); y++){
-					int blockid = 0;
-					if(height - 4 < y && y < height){
-						blockid = Material.DIRT.getId();
-					}else if(y==height){
-						blockid = Material.GRASS.getId();
-					}else if(y < height){
-						blockid = Material.STONE.getId();
-					}
-					this.setBlock(blockdata, x, y, z, (short) blockid);
-				}
 			}
 		}
 		

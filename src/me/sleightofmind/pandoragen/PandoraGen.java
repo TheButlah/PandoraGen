@@ -50,7 +50,7 @@ public class PandoraGen extends JavaPlugin {
 	}
 	
 	private static void initBiomeList() {
-		biomes.add(new PlainsBiome());
+		biomes.add(new PlainsBiome(0));
 	}
 
 }

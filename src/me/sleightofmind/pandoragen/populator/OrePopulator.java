@@ -1,4 +1,4 @@
-package me.sleightofmind.pandoragen.generator;
+package me.sleightofmind.pandoragen.populator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
