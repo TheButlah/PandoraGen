@@ -5,17 +5,17 @@ import java.util.Random;
 import me.sleightofmind.pandoragen.Util;
 
 import org.bukkit.Material;
-import org.bukkit.util.noise.PerlinNoiseGenerator;
 
-public class PlainsBiome implements Biome{
-	
-	private static final String name = "Plains";
+public class DefaultBiome implements Biome {
+
+	private static final String name = "Default";
 	private int id;
 	
-	public PlainsBiome(int id) {
+	public DefaultBiome(int id) {
 		this.id = id;
 	}
 
+	
 	@Override @SuppressWarnings("deprecation")
 	public void generateColumn(int blockx, int blockz, int height, int dominance, Random rand, short[][] blockdata) {
 		for(int y = 0; y < height; y++){
@@ -30,7 +30,7 @@ public class PlainsBiome implements Biome{
 
 	@Override
 	public int generateHeightmap(int blockx, int blockz) {
-		return (int) ((PerlinNoiseGenerator.getNoise(blockx/200.0, blockz/200.0, 4, 2, 0.3) * 25) + 70);
+		return 64;
 	}
 
 	@Override
@@ -38,6 +38,7 @@ public class PlainsBiome implements Biome{
 		return name;
 	}
 
+	@Override
 	public int getID() {
 		return id;
 	}

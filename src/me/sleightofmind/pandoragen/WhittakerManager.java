@@ -8,14 +8,25 @@ import java.util.List;
 
 public class WhittakerManager {
 	
-	public static final String diagramDirectory = "C:\\Users\\Ryan\\Desktop\\";
-	public static final int resolution = 500;
+	public String diagramDirectory;
+	public int resolution;
+	private int numbiomes;
 	
-	public static byte[][][] whittakerdiagram; //biome, x, y
+	private byte[][][] whittakerdiagram; //biome, x, y
 	
-	public WhittakerManager() {
-		whittakerdiagram = new byte[PandoraGen.biomes.size()][resolution][resolution];
-		for (int i = 0; i<Math.ceil(PandoraGen.biomes.size()/3.0); i++) {
+	/**
+	 * Loads Whittaker Diagrams from files and stores them
+	 * @param numbiomes Total number of biomes
+	 * @param diagramDirectory Folder where Whittaker Diagrams are stored
+	 * @param resolution Resolution of the Whittaker Diagram RAW files
+	 */
+	public WhittakerManager(int numbiomes, String diagramDirectory, int resolution) {
+		this.numbiomes = numbiomes;
+		this.diagramDirectory = diagramDirectory;
+		this.resolution = resolution;
+		
+		whittakerdiagram = new byte[numbiomes][resolution][resolution];
+		for (int i = 0; i<Math.ceil(numbiomes/3.0); i++) {
 			File diagramfile = new File(diagramDirectory + (i+1) + ".raw");
 			byte[] data = null;
 			try {
@@ -36,10 +47,10 @@ public class WhittakerManager {
 			}
 			
 			whittakerdiagram[i*3] = red;
-			if ((PandoraGen.biomes.size()-1) % 3 == 2) {
+			if ((numbiomes-1) % 3 == 2) {
 				whittakerdiagram[i*3 + 1] = green;
 				whittakerdiagram[i*3 + 2] = blue;
-			} else if ((PandoraGen.biomes.size() -1)  % 3 == 1) {
+			} else if ((numbiomes -1)  % 3 == 1) {
 				whittakerdiagram[i*3 + 1] = green;
 			} 
 		}
@@ -57,7 +68,7 @@ public class WhittakerManager {
 	
 	public List<Integer> getApplicableBiomes(int xcoord, int zcoord){
 		List<Integer> result = new ArrayList<Integer>();
-		for(int i = 0; i < PandoraGen.biomes.size(); i++){
+		for(int i = 0; i < numbiomes; i++){
 			int humidity = getHumidity(xcoord, zcoord);
 			int temperature = getTemperature(xcoord, zcoord);
 			if(getDominanceByAtmosphere(i, temperature, humidity) != 0){

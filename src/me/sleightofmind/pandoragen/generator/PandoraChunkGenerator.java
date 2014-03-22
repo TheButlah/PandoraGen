@@ -4,14 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import me.sleightofmind.pandoragen.PandoraGen;
+import me.sleightofmind.pandoragen.Util;
+import me.sleightofmind.pandoragen.WhittakerManager;
+import me.sleightofmind.pandoragen.biomes.Biome;
 import me.sleightofmind.pandoragen.populator.OrePopulator;
 
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.generator.BlockPopulator;
-import org.bukkit.util.noise.PerlinNoiseGenerator;
 
 public class PandoraChunkGenerator extends ChunkGenerator{	
 	
@@ -21,19 +23,20 @@ public class PandoraChunkGenerator extends ChunkGenerator{
 		
 		for (int x=0; x<16; x++) {
 			for (int z=0; z<16; z++) {
-				
+				int humidity = PandoraGen.wman.getHumidity(x, z);
+				int temperature = PandoraGen.wman.getTemperature(x, z);
+				int height = 0;
+				for (Biome b : PandoraGen.biomes) {
+					int dominance = PandoraGen.wman.getDominanceByAtmosphere(b.getID(), temperature, humidity);
+					if (dominance <= 0) continue;
+					//height += (b.generateHeightmap(Util.getCoordinate(chunkx, x), Util.getCoordinate(chunkz, z)));
+					
+				}
 			}
 		}
 		
 		return blockdata;
 	}
-	
-	private void setBlock(short[][] blockdata, int x, int y, int z, short blkid) {
-        if (blockdata[y >> 4] == null) {
-            blockdata[y >> 4] = new short[4096];
-        }
-        blockdata[y >> 4][((y & 0xF) << 8) | (z << 4) | x] = blkid;
-    }
 	
 	@Override
     public Location getFixedSpawnLocation(World world, Random random) {

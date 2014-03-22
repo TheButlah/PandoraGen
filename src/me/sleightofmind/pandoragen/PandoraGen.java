@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.sleightofmind.pandoragen.biomes.Biome;
+import me.sleightofmind.pandoragen.biomes.DefaultBiome;
 import me.sleightofmind.pandoragen.biomes.PlainsBiome;
 import me.sleightofmind.pandoragen.generator.PandoraChunkGenerator;
 
@@ -21,16 +22,17 @@ public class PandoraGen extends JavaPlugin {
 	
 	public static final List<Biome> biomes = new ArrayList<Biome>();
 	public static WhittakerManager wman;
+	public static WhittakerManager beachman;
 	
 	@Override
 	public void onEnable() {
 		initBiomeList();
-		wman = new WhittakerManager();
+		wman = new WhittakerManager(6,"C:\\Users\\Ryan\\Desktop\\", 500);
+		
 	}
 	
-	/**
-	 * @return The world if it exists, otherwise it generates the world and then returns it.
-	 */
+	
+	@Override
 	public ChunkGenerator getDefaultWorldGenerator(String worldName, String id){
 		return new PandoraChunkGenerator();
 	}
@@ -50,7 +52,8 @@ public class PandoraGen extends JavaPlugin {
 	}
 	
 	private static void initBiomeList() {
-		biomes.add(new PlainsBiome(0));
+		biomes.add(new DefaultBiome(0));
+		biomes.add(new PlainsBiome(1));
 	}
 
 }

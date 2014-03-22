@@ -3,8 +3,7 @@ package me.sleightofmind.pandoragen.populator;
 import java.util.List;
 import java.util.Random;
 
-import me.sleightofmind.pandoragen.biomes.PlainsBiome;
-
+import me.sleightofmind.pandoragen.biomes.Biomes;
 import org.bukkit.Chunk;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -12,7 +11,7 @@ import org.bukkit.World;
 public class ShrubberyPopulator extends Populator{
 	
 	public static void populate(World w, Random r, Chunk c, List<Integer> biomes) {
-		if(biomes.contains(PlainsBiome.getID())){
+		if(biomes.contains(Biomes.PLAINS.getID())){
 			for(int i = 0; i < 4; i++){
 				int x = r.nextInt(16);
 				int z = r.nextInt(16);
