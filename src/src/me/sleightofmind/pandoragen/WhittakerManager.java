@@ -6,6 +6,8 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.sleightofmind.pandoragen.biomes.Biome;
+
 public class WhittakerManager {
 	
 	public String diagramDirectory;
@@ -15,7 +17,8 @@ public class WhittakerManager {
 	private byte[][][] whittakerdiagram; //biome, x, y
 	
 	/**
-	 * Loads Whittaker Diagrams from files and stores them
+	 * Loads Whittaker Diagrams from files and stores them.
+	 * NOTE: FILES SHOULD DESCRIBE BIOMES IN THE ORDER THAT THE BIOMES APPEAR IN THE PandoraGen.biomes array
 	 * @param numbiomes Total number of biomes
 	 * @param diagramDirectory Folder where Whittaker Diagrams are stored
 	 * @param resolution Resolution of the Whittaker Diagram RAW files
@@ -46,13 +49,20 @@ public class WhittakerManager {
 				}
 			}
 			
-			whittakerdiagram[i*3] = red;
-			if ((numbiomes-1) % 3 == 2) {
-				whittakerdiagram[i*3 + 1] = green;
-				whittakerdiagram[i*3 + 2] = blue;
-			} else if ((numbiomes -1)  % 3 == 1) {
-				whittakerdiagram[i*3 + 1] = green;
-			} 
+			switch((numbiomes-1)%3) {
+			case 0:
+				whittakerdiagram[i*3] = red;
+				break;
+			case 1:
+				whittakerdiagram[i*3] = red;
+				whittakerdiagram[i*3+1] = green;
+				break;
+			case 2:
+				whittakerdiagram[i*3] = red;
+				whittakerdiagram[i*3+1] = green;
+				whittakerdiagram[i*3+2] = blue;
+				break;
+			}
 		}
 	}
 	
@@ -62,8 +72,8 @@ public class WhittakerManager {
 	 * @param zcoord Z Location
 	 * @return Dominance from 0 - 255 inclusive
 	 */
-	public int getDominanceByLocation(int biomeid, int xcoord, int zcoord){
-		return whittakerdiagram[biomeid][getTemperature(xcoord,zcoord)][getHumidity(xcoord,zcoord)] & 0xFF;
+	public int getDominanceByLocation(Biome biome, int xcoord, int zcoord){
+		return whittakerdiagram[biome.getID()][getTemperature(xcoord,zcoord)][getHumidity(xcoord,zcoord)] & 0xFF;
 	}
 	
 	public List<Integer> getApplicableBiomes(int xcoord, int zcoord){

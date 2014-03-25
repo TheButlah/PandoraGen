@@ -8,7 +8,7 @@ import me.sleightofmind.pandoragen.populator.Populator;
 
 public abstract class Biome {
 	
-	protected List<Populator> populators = new ArrayList<Populator>();
+	protected static List<Populator> populators = new ArrayList<Populator>();
 	protected static final String name = null;
 	protected final int id;
 	
