@@ -9,8 +9,8 @@ import me.sleightofmind.pandoragen.populator.Populator;
 public abstract class Biome {
 	
 	protected static List<Populator> populators = new ArrayList<Populator>();
-	protected static final String name = null;
-	protected final int id;
+	private static final String name = null;
+	private final int id;
 	
 	public Biome(int id) {
 		this.id = id;
@@ -37,6 +37,15 @@ public abstract class Biome {
 	
 	public int getID() {
 		return id;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj.getClass().equals(this.getClass())) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 }

@@ -3,21 +3,19 @@ package me.sleightofmind.pandoragen;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.sleightofmind.pandoragen.biomes.Biome;
+
 import org.bukkit.Chunk;
 
 public class Util {
-	public static List<Integer> getApplicableBiomes(Chunk c){
-		List<Integer> result = new ArrayList<Integer>();
-		int[][] blocks = {{0,0},{7,0},{15,0},{0,7},{7,7},{15,7},{0,15},{7,15},{15,15}};
-		for(int[] loc : blocks){
-			List<Integer> biomes = PandoraGen.wman.getApplicableBiomes(getCoordinate(c.getX(), loc[0]), getCoordinate(c.getX(), loc[1]));
-			for(Integer id : biomes){
-				if(!result.contains(id)){
-					result.add(id);
-				}
+	
+	public static List<Biome> getApplicableBiomes(Chunk c) {
+		List<Biome> result = new ArrayList<Biome>();
+		for (int x=0; x<16; x++) {
+			for (int z=0; z<16; z++) {
+				result.PandoraGen.wman.get
 			}
 		}
-		return result;
 	}
 	
 	public static int getCoordinate(int chunkx, int x){

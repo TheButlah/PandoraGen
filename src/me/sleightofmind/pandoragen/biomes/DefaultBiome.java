@@ -6,6 +6,8 @@ import org.bukkit.Material;
 
 public class DefaultBiome extends Biome {
 	
+	private static final String name = "asdf";
+	
 	public DefaultBiome(int id) {
 		super(id);
 	}
@@ -27,5 +29,9 @@ public class DefaultBiome extends Biome {
 	@Override
 	public int generateHeightmap(int blockx, int blockz) {
 		return 64;
+	}
+	
+	{
+		name.charAt(0);
 	}
 }

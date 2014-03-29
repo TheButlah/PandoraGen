@@ -76,13 +76,14 @@ public class WhittakerManager {
 		return whittakerdiagram[biome.getID()][getTemperature(xcoord,zcoord)][getHumidity(xcoord,zcoord)] & 0xFF;
 	}
 	
-	public List<Integer> getApplicableBiomes(int xcoord, int zcoord){
-		List<Integer> result = new ArrayList<Integer>();
+	public List<Biome> getApplicableBiomes(int xcoord, int zcoord){
+		List<Biome> result = new ArrayList<Biome>();
 		for(int i = 0; i < numbiomes; i++){
 			int humidity = getHumidity(xcoord, zcoord);
 			int temperature = getTemperature(xcoord, zcoord);
-			if(getDominanceByAtmosphere(i, temperature, humidity) > 0){
-				result.add(i);
+			Biome current = PandoraGen.biomes.get(i);
+			if(getDominanceByAtmosphere(current, temperature, humidity) > 0){
+				result.add(current);
 			}
 		}
 		return result;
@@ -92,8 +93,8 @@ public class WhittakerManager {
 	 * @param biomeid ID of biome in the Biomes array
 	 * @return Dominance from 0 - 255 inclusive
 	 */
-	public int getDominanceByAtmosphere(int biomeid, int temperature, int humidity){
-		return whittakerdiagram[biomeid][temperature][humidity] & 0xFF;
+	public int getDominanceByAtmosphere(Biome biome, int temperature, int humidity){
+		return whittakerdiagram[biome.getID()][temperature][humidity] & 0xFF;
 	}
 	
 	public int getTemperature(int x, int z){
