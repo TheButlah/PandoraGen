@@ -2,8 +2,6 @@ package me.sleightofmind.pandoragen.biomes;
 
 import java.util.Random;
 
-import me.sleightofmind.pandoragen.populator.ShrubberyPopulator;
-
 import org.bukkit.Material;
 import org.bukkit.util.noise.PerlinNoiseGenerator;
 
@@ -11,7 +9,6 @@ public class PlainsBiome extends Biome{
 	
 	public PlainsBiome(int id) {
 		super(id);
-		populators.add(new ShrubberyPopulator());
 	}
 
 	@Override @SuppressWarnings("deprecation")

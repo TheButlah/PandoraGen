@@ -6,10 +6,7 @@ import java.util.Random;
 
 import me.sleightofmind.pandoragen.Util;
 import me.sleightofmind.pandoragen.biomes.Biome;
-import me.sleightofmind.pandoragen.populator.LandmassPopulator;
 import me.sleightofmind.pandoragen.populator.Populator;
-import me.sleightofmind.pandoragen.populator.StructurePopulator;
-import me.sleightofmind.pandoragen.populator.VegetationPopulator;
 
 import org.bukkit.Chunk;
 import org.bukkit.World;
@@ -21,13 +18,12 @@ public class PandoraBlockPopulator extends BlockPopulator {
 	public void populate(World w, Random r, Chunk c) {
 		List<Biome> biomes = Util.getApplicableBiomes(c);
 		List<Populator> populators = new ArrayList<Populator>();
-		for (Integer i : biomes) {
-			
+		for (Biome b : biomes) {
+			for (Populator p : b.getPopulators()) {
+				if (populators.contains(p)) continue;
+				populators.add(p);
+			}
 		}
-		LandmassPopulator.populate(w, r, c, biomes);
-		StructurePopulator.populate(w, r, c, biomes);
-		VegetationPopulator.populate(w, r, c, biomes);
-		
 	}
 
 }
