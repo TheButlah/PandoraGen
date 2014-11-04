@@ -15,7 +15,7 @@ public class Util {
 		List<Biome> result = new ArrayList<Biome>();
 		for (int x=0; x<16; x+=4) {
 			for (int z=0; z<16; z+=4) {
-				for (Biome b : PandoraGen.wman.getApplicableBiomes(x + c.getX()<<4, z + c.getZ()<<4)) {
+				for (Biome b : PandoraGen.wman.getApplicableBiomesByLocation(x + c.getX()<<4, z + c.getZ()<<4)) {
 					if (result.contains(b)) continue;
 					result.add(b);
 				}

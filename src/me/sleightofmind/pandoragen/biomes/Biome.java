@@ -19,10 +19,11 @@ public abstract class Biome {
 	}
 	
 	/**
-	 * Generates a column of blocks
-	 * @param dominance The dominance from 0 to 255 of this biome over the column specified
+	 * Generates a column of blocks up to columnheight. Makeup of column defined by each unique biome
+	 * @param dominance The dominance from 0 to 255 of this biome over the column specified.
+	 * NOTE: This parameter should not be used to change the height of the column in any way, but instead change the block makeup (like on borders of biomes)
 	 */
-	public abstract short[] generateColumn(int blockx, int blockz, int columnheight, int dominance, Random rand);
+	public abstract short[] generateColumn(int xcoord, int zcoord, int columnheight, int dominance, Random rand);
 	
 	/**
 	 * Generates the height of a column given that there are no competing biomes

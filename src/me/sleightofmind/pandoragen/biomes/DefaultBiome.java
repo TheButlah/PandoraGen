@@ -30,8 +30,4 @@ public class DefaultBiome extends Biome {
 	public int generateHeightmap(int blockx, int blockz) {
 		return 64;
 	}
-	
-	{
-		name.charAt(0);
-	}
 }

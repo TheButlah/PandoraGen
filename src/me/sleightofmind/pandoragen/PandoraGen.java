@@ -26,6 +26,7 @@ public class PandoraGen extends JavaPlugin {
 	public static WhittakerManager beachman;
 	
 	//Internal plumbing for all the Biomes
+	//Biome 0 should always be the DefaultBiome
 	static {
 		biomes.add(new DefaultBiome(0));
 		biomes.add(new PlainsBiome(1));
